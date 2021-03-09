@@ -8,17 +8,13 @@ if(theme == null){
 	setTheme(theme)
 }
 
-let themeDots = document.getElementsByClassName('theme-dot')
+const themeDots = document.querySelectorAll('div.theme-dot');
 
-
-for (var i=0; themeDots.length > i; i++){
-	themeDots[i].addEventListener('click', function(){
-		let mode = this.dataset.mode
-		console.log('Option clicked:', mode)
-		setTheme(mode)
-	})
+const handleThemeClick = (e) => {
+	const el = e.target;
+	let mode = el.dataset.mode
+        setTheme(mode)
 }
-
 function setTheme(mode){
 	if(mode == 'light'){
 		document.getElementById('theme-style').href = 'default.css'
@@ -38,3 +34,6 @@ function setTheme(mode){
 
 	localStorage.setItem('theme', mode)
 }
+themeDots.forEach(themeDot => {
+	themeDot.addEventListener('click',handleThemeClick)
+})
